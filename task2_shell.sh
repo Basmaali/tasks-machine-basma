@@ -2,8 +2,9 @@
 while read line;
 do
 	array+=("$line")
-done < test
+done < test      ###test file is the log file
 
+##This part to extrach pattern for "looged in " then "change password" then "logged off"
 for ((j==0 ;j<=${#array[*]};j++ ))
 do
 	if [[ ${array[j]} == *in* ]]
@@ -30,7 +31,7 @@ while read v;
 do
 	te+=("$v")
 done < test1
-
+##To print the extracted pattern from log
 for ((x==0 ;x<=${#y[*]};x=x+3 ))
 do
 	if [[ $x == ${#y[*]} ]]
