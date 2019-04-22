@@ -2,7 +2,7 @@
 while read line;
 do
 	array+=("$line")
-done < test
+done < test  #test file as log
 
 #for ((i==0 ;i<=${#array[*]};i++ ))
 #do
