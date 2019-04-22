@@ -1,0 +1,10 @@
+---
+
+- hosts: lemp
+  remote_user: basma
+
+  roles:
+    - widespread
+    - net
+    - yaegashi.blockinfile
+    - db 

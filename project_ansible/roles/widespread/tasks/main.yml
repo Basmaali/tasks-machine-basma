@@ -1,0 +1,11 @@
+---
+# tasks file for widespread
+- name: change Repo Web
+  copy: 
+    src: source.list
+    dest: /etc/apt
+    backup: yes
+
+- name: update
+  apt: 
+     update_cache: yes

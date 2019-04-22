@@ -1,0 +1,13 @@
+---
+# handlers file for net
+- name: Restart Nginx
+  service: 
+    name: nginx
+    state: restarted
+    enabled: yes
+
+- name: Restart PHP-FPM
+  service: 
+    name: php5-fpm
+    state: restarted
+    enabled: yes

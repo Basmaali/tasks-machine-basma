@@ -1,0 +1,40 @@
+---
+# tasks file for net
+- name: Install Nginx
+  apt: 
+    name: nginx
+    state: latest
+ 
+- name: Install PHP-FPM
+  apt: 
+    name: php5-fpm
+    state: latest
+
+- name: Configure PHP
+  lineinfile:
+    dest: /etc/php5/fpm/php.ini
+    regexp: ';cgi.fix_pathinfo=0'
+    insertafter: 'cgi.fix_pathinfo'
+    line: 'cgi.fix_pathinfo = 0'
+
+- name: Edit Configuration file of Nginx
+  lineinfile: 
+    dest: /etc/nginx/sites-available/default
+    regexp: "{{'\t'}}index\ index.html\ index.htm"
+    line: "{{'\t'}}index\ index.php\ index.html\ index.htm"
+
+- name: Edit PHP in Nginx Configuration 
+  lineinfile: 
+    dest: /etc/nginx/sites-available/default
+    regexp: "{{'\t'}}#location\ ~\ \\.php$\ {"
+    line: "{{'\t'}}location\ ~\ \\.php$\ {"
+
+- name: Create Root Directory
+  file: 
+    path: /usr/share/nginx/html/
+    state: directory
+
+- name: Upload info.php
+  template: 
+    src: index.php.j2
+    dest: /var/www/html/info.php
